@@ -1,0 +1,30 @@
+SELECT '主文' AS [類型(主文/留言)], 
+       message AS [內容], 
+       t_timestamp AS [時間], 
+       author_name AS [發文者/留言者]
+FROM fb_posts t1
+LEFT JOIN fb_authors t2 ON t2.author_id = t1.author_id
+WHERE message IS NOT NULL 
+AND t_timestamp > '2024-02-23'
+
+UNION ALL
+
+SELECT '留言' AS [類型(主文/留言)], 
+       message AS [內容], 
+       t_timestamp AS [時間], 
+       author_name AS [發文者/留言者]
+FROM fb_comments t1
+LEFT JOIN fb_authors t2 ON t2.author_id = t1.author_id
+WHERE message IS NOT NULL 
+AND t_timestamp > '2024-02-23'
+
+UNION ALL
+
+SELECT '留言' AS [類型(主文/留言)], 
+       message AS [內容], 
+       t_timestamp AS [時間], 
+       author_name AS [發文者/留言者]
+FROM fb_reply t1
+LEFT JOIN fb_authors t2 ON t2.author_id = t1.author_id
+WHERE message IS NOT NULL 
+AND t_timestamp > '2024-02-23';
